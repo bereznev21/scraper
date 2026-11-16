@@ -118,3 +118,15 @@ def scrape_books(is_save=False):
             f.write(books)
 
     return books
+
+
+def schedule_scraper():
+    schedule.every().day.at("19:00").do(scrape_books, is_save=True)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(30)
+
+
+if __name__ == "__main__":
+    schedule_scraper()
